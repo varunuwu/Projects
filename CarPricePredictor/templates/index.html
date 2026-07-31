@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Price Predictor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f5f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            width: 450px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #2e7d32;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+            color: #2e7d32;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #555;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1.5px solid #ccc;
+            background: #fafffe;
+            color: #333;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #43a047;
+            box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.15);
+        }
+        input::placeholder {
+            color: #aaa;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 22px;
+            border: none;
+            border-radius: 8px;
+            background: #2e7d32;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #1b5e20;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 Car Price Predictor</h1>
+        <form action="/predict" method="POST">
+
+            <label>Present Price (in Lakhs)</label>
+            <input type="text" name="present_price" placeholder="eg. 6.5" required>
+
+            <label>Kilometers Driven</label>
+            <input type="text" name="kms_driven" placeholder="eg. 45000" required>
+
+            <label>Fuel Type</label>
+            <select name="fuel_type">
+                <option value="0">Petrol</option>
+                <option value="1">Diesel</option>
+                <option value="2">CNG</option>
+            </select>
+
+            <label>Seller Type</label>
+            <select name="seller_type">
+                <option value="0">Dealer</option>
+                <option value="1">Individual</option>
+            </select>
+
+            <label>Transmission</label>
+            <select name="transmission">
+                <option value="0">Manual</option>
+                <option value="1">Automatic</option>
+            </select>
+
+            <label>Number of Previous Owners</label>
+            <input type="text" name="owner" placeholder="eg. 0" required>
+
+            <label>Car Age (in years)</label>
+            <input type="text" name="car_age" placeholder="eg. 5" required>
+
+            <button type="submit" class="btn">Predict Price</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
